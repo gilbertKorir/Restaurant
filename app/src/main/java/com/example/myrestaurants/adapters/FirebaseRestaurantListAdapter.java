@@ -10,17 +10,26 @@ import androidx.annotation.NonNull;
 
 import com.example.myrestaurants.R;
 import com.example.myrestaurants.models.Business;
+import com.example.myrestaurants.models.Restaurant;
 import com.example.myrestaurants.utils.ItemTouchHelperAdapter;
 import com.example.myrestaurants.utils.OnStartDragListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+
+import java.util.ArrayList;
 
 
 public class FirebaseRestaurantListAdapter extends FirebaseRecyclerAdapter<Business, FirebaseRestaurantViewHolder> implements ItemTouchHelperAdapter {
     private DatabaseReference mRef;
     private OnStartDragListener mOnStartDragListener;
     private Context mContext;
+
+    private ChildEventListener mChildEventListener;
+    private ArrayList<Restaurant> mRestaurants = new ArrayList<>();
 
     public FirebaseRestaurantListAdapter(FirebaseRecyclerOptions<Business> options,
                                          DatabaseReference ref,
@@ -30,6 +39,34 @@ public class FirebaseRestaurantListAdapter extends FirebaseRecyclerAdapter<Busin
         mRef = ref.getRef();
         mOnStartDragListener = onStartDragListener;
         mContext = context;
+
+//        mChildEventListener = mRef.addChildEventListener(new ChildEventListener() {
+//
+//            @Override
+//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//                mRestaurants.add(dataSnapshot.getValue(Restaurant.class));
+//            }
+//
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
     }
 
     @Override
@@ -55,11 +92,12 @@ public class FirebaseRestaurantListAdapter extends FirebaseRecyclerAdapter<Busin
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
+        notifyItemMoved(fromPosition, toPosition);
         return false;
     }
 
     @Override
     public void onItemDismiss(int position) {
-
+        getRef(position).removeValue();
     }
 }
