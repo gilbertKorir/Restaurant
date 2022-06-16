@@ -16,15 +16,18 @@
         android:theme="@style/Theme.MyRestaurants"
         tools:targetApi="31">
         <activity
+            android:name=".SavedRestaurantListFragment"
+            android:exported="false" />
+        <activity
             android:name=".ui.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.CreateAccountActivity"
             android:exported="false" />
@@ -42,7 +45,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="false">
-<!--            android:theme="@style/NoActionBarTheme"-->
+
+            <!-- android:theme="@style/NoActionBarTheme" -->
         </activity>
     </application>
 

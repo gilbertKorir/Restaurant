@@ -10,7 +10,11 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_restaurant_detail.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_restaurants.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/activity_saved_restaurant_list.xml" value="0.14628623188405798" />
+        <entry key="app/src/main/res/layout/activity_saved_restaurant_list_fragment.xml" value="0.14628623188405798" />
         <entry key="app/src/main/res/layout/fragment_restaurant_detail.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/fragment_restaurant_list.xml" value="0.14628623188405798" />
+        <entry key="app/src/main/res/layout/fragment_saved_restaurant_list.xml" value="0.14628623188405798" />
         <entry key="app/src/main/res/layout/linear.xml" value="0.14628623188405798" />
         <entry key="app/src/main/res/layout/restaurant_list_item.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/restaurant_list_item_drag.xml" value="0.25" />

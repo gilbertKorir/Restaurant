@@ -1,6 +1,7 @@
 
 package com.example.myrestaurants.models;
 
+import java.util.ArrayList;
 import java.util.List;
 //import javax.annotation.Generate
 import com.google.gson.annotations.Expose;
@@ -62,7 +63,7 @@ public class Business {
      * 
      */
 
-
+String index;
     public Business() {
     }
 
@@ -103,6 +104,9 @@ public class Business {
         this.location = location;
         this.distance = distance;
         this.transactions = transactions;
+    }
+
+    public Business(String name, String phone, String website, double rating, String imageUrl, ArrayList<String> address, double latitude, double longitude, ArrayList<String> categories) {
     }
 
     public Double getRating() {
@@ -230,6 +234,13 @@ public class Business {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 
 }

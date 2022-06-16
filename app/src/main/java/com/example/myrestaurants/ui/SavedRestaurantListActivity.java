@@ -32,76 +32,81 @@ import com.google.firebase.database.Query;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SavedRestaurantListActivity extends AppCompatActivity implements OnStartDragListener {
-    private DatabaseReference mRestaurantReference;
-    private FirebaseRestaurantListAdapter mFirebaseAdapter;
-    private ItemTouchHelper mItemTouchHelper;
+public class SavedRestaurantListActivity extends AppCompatActivity {
+//    private DatabaseReference mRestaurantReference;
+//    private FirebaseRestaurantListAdapter mFirebaseAdapter;
+//    private ItemTouchHelper mItemTouchHelper;
 
-    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
-    @BindView(R.id.errorTextView) TextView mErrorTextView;
-    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+//    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+//    @BindView(R.id.errorTextView) TextView mErrorTextView;
+//    @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurants);
-        ButterKnife.bind(this);
-
-        setUpFirebaseAdapter();
-        hideProgressBar();
-        showRestaurants();
-    }
-    private void setUpFirebaseAdapter(){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-
-        //indexing
-        Query query = FirebaseDatabase.getInstance()
-                .getReference(Constants.FIREBASE_CHILD_RESTAURANTS)
-                .child(uid)
-                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
-
-        mRestaurantReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RESTAURANTS).child(uid);
-        FirebaseRecyclerOptions<Business> options =
-                new FirebaseRecyclerOptions.Builder<Business>()
-                        .setQuery(mRestaurantReference, Business.class)
-                        .build();
-
-        mFirebaseAdapter = new FirebaseRestaurantListAdapter(options,mRestaurantReference, this,this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mFirebaseAdapter);
-        mRecyclerView.setHasFixedSize(true);
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
-        mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mFirebaseAdapter.startListening();
+        setContentView(R.layout.activity_saved_restaurant_list);
+//        ButterKnife.bind(this);
+//
+//        setUpFirebaseAdapter();
+//        hideProgressBar();
+//        showRestaurants();
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(mFirebaseAdapter!= null) {
-            mFirebaseAdapter.stopListening();
-        }
-    }
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder){
-        mItemTouchHelper.startDrag(viewHolder);
-    }
-
-    private void showRestaurants() {
-        mRecyclerView.setVisibility(View.VISIBLE);
-    }
-
-    private void hideProgressBar() {
-        mProgressBar.setVisibility(View.GONE);
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mFirebaseAdapter.stopListening();
-    }
+//    @Override
+//    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+//
+//    }
+//    private void setUpFirebaseAdapter(){
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        String uid = user.getUid();
+//
+//        //indexing
+//        Query query = FirebaseDatabase.getInstance()
+//                .getReference(Constants.FIREBASE_CHILD_RESTAURANTS)
+//                .child(uid)
+//                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
+//
+////        mRestaurantReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RESTAURANTS).child(uid);
+//        FirebaseRecyclerOptions<Business> options =
+//                new FirebaseRecyclerOptions.Builder<Business>()
+//                        .setQuery(query, Business.class)
+//                        .build();
+//
+//        mFirebaseAdapter = new FirebaseRestaurantListAdapter(options, query,this,this);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        mRecyclerView.setAdapter(mFirebaseAdapter);
+//        mRecyclerView.setHasFixedSize(true);
+//        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
+//        mItemTouchHelper = new ItemTouchHelper(callback);
+//        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+//    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        mFirebaseAdapter.startListening();
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        if(mFirebaseAdapter!= null) {
+//            mFirebaseAdapter.stopListening();
+//        }
+//    }
+//    public void onStartDrag(RecyclerView.ViewHolder viewHolder){
+//        mItemTouchHelper.startDrag(viewHolder);
+//    }
+//
+//    private void showRestaurants() {
+//        mRecyclerView.setVisibility(View.VISIBLE);
+//    }
+//
+//    private void hideProgressBar() {
+//        mProgressBar.setVisibility(View.GONE);
+//    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        mFirebaseAdapter.stopListening();
+//    }
 }
