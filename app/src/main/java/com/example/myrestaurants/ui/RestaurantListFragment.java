@@ -1,5 +1,6 @@
 package com.example.myrestaurants.ui;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -27,6 +28,7 @@ import com.example.myrestaurants.models.Restaurant;
 import com.example.myrestaurants.models.YelpBusinessesSearchResponse;
 import com.example.myrestaurants.network.YelpApi;
 import com.example.myrestaurants.network.YelpClient;
+import com.example.myrestaurants.utils.OnRestaurantSelectedListener;
 //import android.support.v7.widget.SearchView;
 
 import java.util.ArrayList;
@@ -42,10 +44,22 @@ public class RestaurantListFragment extends Fragment {
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
 
     private RestaurantListAdapter mAdapter;
-    public List<Business> restaurants = new ArrayList<>();
+    public ArrayList<Business> restaurants = new ArrayList<>();
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private String mRecentAddress;
+
+    private OnRestaurantSelectedListener mOnRestaurantSelectedListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mOnRestaurantSelectedListener = (OnRestaurantSelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + e.getMessage());
+        }
+    }
 
     public RestaurantListFragment() {
         // Required empty public constructor
@@ -83,7 +97,6 @@ public class RestaurantListFragment extends Fragment {
 
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -119,8 +132,8 @@ public class RestaurantListFragment extends Fragment {
 
 //                hideProgressBar();
                 if (response.isSuccessful()) {
-                    restaurants = response.body().getBusinesses();
-                    mAdapter = new RestaurantListAdapter(getContext(), restaurants);
+                    restaurants = (ArrayList<Business>) response.body().getBusinesses();
+                    mAdapter = new RestaurantListAdapter(getContext(), restaurants,mOnRestaurantSelectedListener);
                     mRecyclerView.setAdapter(mAdapter);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                     mRecyclerView.setLayoutManager(layoutManager);

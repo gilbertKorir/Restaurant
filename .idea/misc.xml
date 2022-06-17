@@ -5,6 +5,11 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1945" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2015" />
+        <entry key="app/src/main/res/layout-land/activity_restaurants.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-land/activity_saved_restaurant_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-land/fragment_restaurant_detail.xml" value="0.16313932980599646" />
+        <entry key="app/src/main/res/layout-land/restaurant_list_item.xml" value="0.16313932980599646" />
+        <entry key="app/src/main/res/layout-land/restaurant_list_item_drag.xml" value="0.16313932980599646" />
         <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
@@ -19,7 +24,9 @@
         <entry key="app/src/main/res/layout/restaurant_list_item.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/restaurant_list_item_drag.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.19375" />
+        <entry key="app/src/main/res/menu/menu_photo.xml" value="0.19375" />
         <entry key="app/src/main/res/menu/menu_search.xml" value="0.19270833333333334" />
+        <entry key="app/src/main/res/xml/file_paths.xml" value="0.1322463768115942" />
       </map>
     </option>
   </component>

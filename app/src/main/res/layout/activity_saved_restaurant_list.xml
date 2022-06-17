@@ -9,6 +9,6 @@ tools:context=".ui.SavedRestaurantListActivity">
         android:name="com.example.myrestaurants.ui.SavedRestaurantListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_saved_restaurant_list" />
+        tools:layout="@layout/fragment_restaurant_list" />
 
 </RelativeLayout>

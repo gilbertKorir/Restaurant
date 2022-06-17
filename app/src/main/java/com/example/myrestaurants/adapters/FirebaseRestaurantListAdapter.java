@@ -2,6 +2,7 @@ package com.example.myrestaurants.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,11 +12,15 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.myrestaurants.Constants;
 import com.example.myrestaurants.R;
 import com.example.myrestaurants.models.Business;
 import com.example.myrestaurants.models.Restaurant;
 import com.example.myrestaurants.ui.RestaurantDetailActivity;
+import com.example.myrestaurants.ui.RestaurantDetailFragment;
 import com.example.myrestaurants.utils.ItemTouchHelperAdapter;
 import com.example.myrestaurants.utils.OnStartDragListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -40,6 +45,7 @@ public class FirebaseRestaurantListAdapter extends FirebaseRecyclerAdapter<Busin
     private Context mContext;
     private ChildEventListener mChildEventListener;
     private ArrayList<Business> mRestaurants = new ArrayList<>();
+    private int mOrientation;
 
     public FirebaseRestaurantListAdapter(FirebaseRecyclerOptions<Business> options,
                                          Query ref,
@@ -91,16 +97,41 @@ public class FirebaseRestaurantListAdapter extends FirebaseRecyclerAdapter<Busin
                 return false;
             }
         });
+
+        //Landscape orientation
+        mOrientation = viewHolder.itemView.getResources().getConfiguration().orientation;
+        if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+            createDetailFragment(0);
+        }
+
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
-                intent.putExtra("position", viewHolder.getAdapterPosition());
-                intent.putExtra("restaurants", Parcels.wrap(mRestaurants));
-                mContext.startActivity(intent);
+
+                int itemPosition = viewHolder.getAdapterPosition();
+                if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    createDetailFragment(itemPosition);
+                } else {
+                    Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
+                    intent.putExtra(Constants.EXTRA_KEY_POSITION, itemPosition);
+                    intent.putExtra(Constants.EXTRA_KEY_RESTAURANTS, Parcels.wrap(mRestaurants));
+                    intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_SAVED);
+                    mContext.startActivity(intent);
+                }
             }
         });
+
+    }
+    private void createDetailFragment(int position) {
+        // Creates new RestaurantDetailFragment with the given position:
+        RestaurantDetailFragment detailFragment = RestaurantDetailFragment.newInstance(mRestaurants, position, Constants.SOURCE_SAVED);
+        // Gathers necessary components to replace the FrameLayout in the layout with the RestaurantDetailFragment:
+        FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
+        //  Replaces the FrameLayout with the RestaurantDetailFragment:
+        ft.replace(R.id.restaurantDetailContainer, detailFragment);
+        // Commits these changes:
+        ft.commit();
     }
 
     @NonNull

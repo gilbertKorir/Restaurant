@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <fragment
+        android:id="@+id/fragmentItemsList"
+        android:name="com.example.myrestaurants.ui.RestaurantListFragment"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        tools:layout="@layout/fragment_restaurant_list" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:background="#FF5722" />
+
+    <FrameLayout
+        android:id="@+id/restaurantDetailContainer"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6">
+
+    </FrameLayout>
+
+</LinearLayout>

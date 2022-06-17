@@ -123,13 +123,14 @@
 
             <Button
                 android:id="@+id/saveRestaurantButton"
-                android:layout_width="match_parent"
+                android:layout_width="214dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginBottom="48dp"
                 android:background="#1DD6C5"
                 android:text="Save Restaurant"
-                android:textColor="#0D47A1"
+                android:textColor="#F3F3F4"
                 android:textSize="15sp" />
         </RelativeLayout>
     </LinearLayout>

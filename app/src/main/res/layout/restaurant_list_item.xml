@@ -10,27 +10,28 @@
         android:scaleType="centerCrop"/>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="#ffffff"
         android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical"
         android:padding="10dp">
 
         <TextView
+            android:id="@+id/restaurantNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/restaurantNameTextView"
-            android:textSize="20dp"
-            android:textStyle="bold"
             android:text="Restaurant Name"
-            android:textColor="#FF3700B3"/>
+            android:textColor="#FF3700B3"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/categoryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="One Cuisine Type"
-            android:id="@+id/categoryTextView"
-            android:textStyle="italic"/>
+            android:textColor="#FF5722"
+            android:textStyle="italic" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -43,7 +44,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:text="Rating"
-                android:textColor="#FF3700B3" />
+                android:textColor="#0E9387" />
         </RelativeLayout>
     </LinearLayout>
 
